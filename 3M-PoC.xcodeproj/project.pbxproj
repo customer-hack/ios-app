@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2694F4DDECF9F04A7CF319DA /* Pods_3M_PoCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57602ECBBB7289878DC2833D /* Pods_3M_PoCTests.framework */; };
 		73939DAB4DF21F667A561877 /* Pods_3M_PoC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57AE674C41E044FFD8BD4348 /* Pods_3M_PoC.framework */; };
+		D063432A22A04FB5006FB30A /* JoeLouis.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D063432922A04FB5006FB30A /* JoeLouis.jpg */; };
+		D063432C22A04FC4006FB30A /* DetroitChimera.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D063432B22A04FC4006FB30A /* DetroitChimera.jpg */; };
+		D063432E22A04FD2006FB30A /* HelloWorld.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D063432D22A04FD1006FB30A /* HelloWorld.jpg */; };
 		D0A3D078229ECCA500A3D4BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3D077229ECCA500A3D4BD /* AppDelegate.swift */; };
 		D0A3D07A229ECCA500A3D4BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3D079229ECCA500A3D4BD /* ViewController.swift */; };
 		D0A3D07D229ECCA500A3D4BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A3D07B229ECCA500A3D4BD /* Main.storyboard */; };
@@ -47,6 +50,9 @@
 		72D9F0AF801714BA89AF230A /* Pods-3M-PoCUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3M-PoCUITests.debug.xcconfig"; path = "Target Support Files/Pods-3M-PoCUITests/Pods-3M-PoCUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7CD43833456F2693A901B099 /* Pods_3M_PoCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3M_PoCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4DDFCA8B0945C73FEB68F0 /* Pods-3M-PoCUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3M-PoCUITests.release.xcconfig"; path = "Target Support Files/Pods-3M-PoCUITests/Pods-3M-PoCUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D063432922A04FB5006FB30A /* JoeLouis.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = JoeLouis.jpg; path = ../../../Downloads/JoeLouis.jpg; sourceTree = "<group>"; };
+		D063432B22A04FC4006FB30A /* DetroitChimera.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = DetroitChimera.jpg; path = ../../../Downloads/DetroitChimera.jpg; sourceTree = "<group>"; };
+		D063432D22A04FD1006FB30A /* HelloWorld.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = HelloWorld.jpg; path = ../../../Downloads/HelloWorld.jpg; sourceTree = "<group>"; };
 		D0A3D074229ECCA500A3D4BD /* 3M-PoC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "3M-PoC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A3D077229ECCA500A3D4BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0A3D079229ECCA500A3D4BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +144,9 @@
 				D0A3D080229ECCA600A3D4BD /* LaunchScreen.storyboard */,
 				D0A3D083229ECCA600A3D4BD /* Info.plist */,
 				D0BB862222A03D1A00FBB129 /* ProxyManager.swift */,
+				D063432D22A04FD1006FB30A /* HelloWorld.jpg */,
+				D063432B22A04FC4006FB30A /* DetroitChimera.jpg */,
+				D063432922A04FB5006FB30A /* JoeLouis.jpg */,
 				D0E1D06F22A043B4002B4DBC /* fordicon.jpg */,
 			);
 			path = "3M-PoC";
@@ -287,8 +296,11 @@
 			files = (
 				D0A3D082229ECCA600A3D4BD /* LaunchScreen.storyboard in Resources */,
 				D0A3D07F229ECCA600A3D4BD /* Assets.xcassets in Resources */,
+				D063432A22A04FB5006FB30A /* JoeLouis.jpg in Resources */,
 				D0A3D07D229ECCA500A3D4BD /* Main.storyboard in Resources */,
+				D063432E22A04FD2006FB30A /* HelloWorld.jpg in Resources */,
 				D0E1D07022A043B4002B4DBC /* fordicon.jpg in Resources */,
+				D063432C22A04FC4006FB30A /* DetroitChimera.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

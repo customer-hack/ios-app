@@ -18,10 +18,9 @@ class ProxyManager: NSObject {
     
     // Manager
     fileprivate var sdlManager: SDLManager!
-
+    
     // Singleton
     static let sharedManager = ProxyManager()
-
 
 //    for mac emulator
 //    let lifecycleConfiguration = SDLLifecycleConfiguration(appName: "App Name", fullAppId: "App Id", ipAddress: "IP Address", port: Port))
@@ -55,6 +54,7 @@ class ProxyManager: NSObject {
         sdlManager.start { (success, error) in
             if success {
                 // Your app has successfully connected with the SDL Core
+                self.updateScreen()
                 let display = SDLSetDisplayLayout(predefinedLayout: .graphicWithText)
                 self.sdlManager.send(request: display) { (request, response, error) in
                     if response?.resultCode == .success {
@@ -65,22 +65,26 @@ class ProxyManager: NSObject {
         }
     }
     
-    func insertText() {
+    func updateScreen() {
         sdlManager.screenManager.beginUpdates()
+        if let appImage = UIImage(named: "JoeLouis.jpg") {
+            let joeLouisArtwork = SDLArtwork(image: appImage, persistent: true, as: .JPG)
+            sdlManager.fileManager.upload(artwork: joeLouisArtwork) {
+                (success, artworkName, bytesAvailable, error) in
+                guard error == nil else {return}
+            }
+            sdlManager.screenManager.primaryGraphic = joeLouisArtwork
+        }
+        
         
         sdlManager.screenManager.textField1 = "hello"
         sdlManager.screenManager.textField2 = "world"
-//        sdlManager.screenManager.primaryGraphic =
-//        sdlManager.screenManager.softButtonObjects = [, ]
-        
+
         sdlManager.screenManager.endUpdates { (error) in
             if error != nil {
-//                Error Updating UI
-            } else {
-//                Update to UI was Successful
+                print("Error in sdlManager.screenManager.endUpdates")
             }
         }
-        
     }
 }
 
