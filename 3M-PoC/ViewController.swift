@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     }
     @IBAction func showLargeGraphic(_ sender: Any) {
         if let detroitChimeraImage = UIImage(named: "DetroitChimera.jpg") {
-            ProxyManager.sharedManager.updateScreen(image: detroitChimeraImage, text1: "Detroit", text2: "Chimera", template: .graphicWithText)
+            ProxyManager.sharedManager.updateScreen(image: detroitChimeraImage, text1: "Detroit", text2: "Chimera", template: .largeGraphicOnly)
         }
     }
     
