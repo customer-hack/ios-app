@@ -10,11 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let proxyManager = ProxyManager.self
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func showChimera(_ sender: Any) {
+        if let detroitChimeraImage = UIImage(named: "DetroitChimera.jpg") {
+            ProxyManager.sharedManager.updateScreen(image: detroitChimeraImage, text1: "Detroit", text2: "Chimera", template: .graphicWithText)
+        }
+    }
+    @IBAction func showLargeGraphic(_ sender: Any) {
+        if let detroitChimeraImage = UIImage(named: "DetroitChimera.jpg") {
+            ProxyManager.sharedManager.updateScreen(image: detroitChimeraImage, text1: "Detroit", text2: "Chimera", template: .graphicWithText)
+        }
+    }
+    
 }
 
