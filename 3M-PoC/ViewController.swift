@@ -22,11 +22,11 @@ class ViewController: UIViewController {
             ProxyManager.sharedManager.updateScreen(image: detroitChimeraImage, text1: "Detroit", text2: "Chimera", template: .graphicWithText)
         }
     }
+
     @IBAction func showLargeGraphic(_ sender: Any) {
         if let detroitChimeraImage = UIImage(named: "DetroitChimera.jpg") {
             ProxyManager.sharedManager.updateScreen(image: detroitChimeraImage, text1: "Detroit", text2: "Chimera", template: .largeGraphicOnly)
         }
     }
-    
 }
 

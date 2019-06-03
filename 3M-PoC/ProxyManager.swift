@@ -12,13 +12,13 @@ import SmartDeviceLink
 class ProxyManager: NSObject {
 //    let appName = "DOOM"
 //    let fullAppId = "666"
-    
+
     let appName = "3M"
     let fullAppId = "1446742213"
-    
+
     // Manager
     fileprivate var sdlManager: SDLManager!
-    
+
     // Singleton
     static let sharedManager = ProxyManager()
 
@@ -48,14 +48,47 @@ class ProxyManager: NSObject {
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
 
     }
+    
+    func initialize_buttons() {
+        self.sdlManager.screenManager.softButtonObjects = []
+        
+        if let joeLouisImage = UIImage(named: "JoeLouis.jpg"){
+            let joeLouisArtwork = SDLArtwork(image: joeLouisImage, persistent: false, as: .JPG)
+            let joeLouisSoftButtonState1 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 1", text: "Joe Louis", artwork: joeLouisArtwork)
+            let joeLouisSoftButtonState2 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 2", text: "Go Back", artwork: joeLouisArtwork)
+            let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2],
+                                                              initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
+                                                                guard buttonPress != nil else { return }
+                                                                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis",
+                                                                                                        template: .largeGraphicOnly)
+            }
+            self.sdlManager.screenManager.softButtonObjects.append(joeLouisSoftButtonObject)
+        }
+        
+        if let chimeraImage = UIImage(named: "DetroitChimera.jpg"){
+            let chimeraArtwork = SDLArtwork(image: chimeraImage, persistent: false, as: .JPG)
+            let chimeraSoftButtonState1 = SDLSoftButtonState(stateName: "Chimera Soft Button State 1", text: "Detroit Chimera", artwork: chimeraArtwork)
+            let chimeraSoftButtonState2 = SDLSoftButtonState(stateName: "Chimera Soft Button State 2", text: "Go Back", artwork: chimeraArtwork)
+            let chimeraSoftButtonObject = SDLSoftButtonObject(name: "Show Chimera", states: [chimeraSoftButtonState1, chimeraSoftButtonState2],
+                                                       initialStateName: "Chimera Soft Button State 1") { (buttonPress, buttonEvent) in
+                guard buttonPress != nil else { return }
+                ProxyManager.sharedManager.updateScreen(image: chimeraImage, text1: "Detroit", text2: "Chimera",
+                                                        template: .largeGraphicOnly)
+            }
+            self.sdlManager.screenManager.softButtonObjects.append(chimeraSoftButtonObject)
+        }
+    }
 
     func connect() {
         // Start watching for a connection with a SDL Core
         sdlManager.start { (success, error) in
             if success {
                 // Your app has successfully connected with the SDL Core
+                self.initialize_buttons()
                 if let appImage = UIImage(named: "JoeLouis.jpg") {
-                    self.updateScreen(image: appImage, text1: "Joe", text2: "Louis", template: .graphicWithText)
+                    let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
+                    retrievedSoftButtonObject?.transitionToNextState()
+                    self.updateScreen(image: appImage, text1: "Joe", text2: "Louis", template: .graphicWithTextAndSoftButtons)
                 }
             }
         }
@@ -65,6 +98,7 @@ class ProxyManager: NSObject {
         sdlManager.screenManager.beginUpdates()
 
         let artwork = SDLArtwork(image: image, persistent: false, as: .JPG)
+        
         self.sdlManager.fileManager.upload(artwork: artwork) {
             (success, artworkName, bytesAvailable, error) in
             guard error == nil else { return }
