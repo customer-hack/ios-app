@@ -31,13 +31,6 @@ class ProxyManager: NSObject {
 
         let lifecycleConfiguration = SDLLifecycleConfiguration(appName: appName, fullAppId: fullAppId)
 
-        let green = SDLRGBColor(red: 126, green: 188, blue: 121)
-        let white = SDLRGBColor(red: 249, green: 251, blue: 254)
-        let grey = SDLRGBColor(red: 186, green: 198, blue: 210)
-        let darkGrey = SDLRGBColor(red: 57, green: 78, blue: 96)
-        lifecycleConfiguration.dayColorScheme = SDLTemplateColorScheme(primaryRGBColor: green, secondaryRGBColor: grey, backgroundRGBColor: white)
-        lifecycleConfiguration.nightColorScheme = SDLTemplateColorScheme(primaryRGBColor: green, secondaryRGBColor: grey, backgroundRGBColor: darkGrey)
-
         if let appImage = UIImage(named: "iconLogo") {
             let appIcon = SDLArtwork(image: appImage, name: "fordicon.jpg", persistent: true, as: .JPG)
             lifecycleConfiguration.appIcon = appIcon
@@ -48,32 +41,32 @@ class ProxyManager: NSObject {
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
 
     }
-    
+
     func initialize_buttons() {
         self.sdlManager.screenManager.softButtonObjects = []
-        
-        if let joeLouisImage = UIImage(named: "JoeLouis.jpg"){
+        if let joeLouisImage = UIImage(named: "Assets/JoeLouis.jpg"){
             let joeLouisArtwork = SDLArtwork(image: joeLouisImage, persistent: false, as: .JPG)
             let joeLouisSoftButtonState1 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 1", text: "Joe Louis", artwork: joeLouisArtwork)
             let joeLouisSoftButtonState2 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 2", text: "Go Back", artwork: joeLouisArtwork)
-            let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2],
-                                                              initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
-                                                                guard buttonPress != nil else { return }
-                                                                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis",
-                                                                                                        template: .largeGraphicOnly)
+            let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2], initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
+                guard buttonPress != nil else { return }
+                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
+                sleep(5)
+                ProxyManager.sharedManager.redirectHome()
             }
             self.sdlManager.screenManager.softButtonObjects.append(joeLouisSoftButtonObject)
         }
-        
-        if let chimeraImage = UIImage(named: "DetroitChimera.jpg"){
+
+        if let chimeraImage = UIImage(named: "Assets/DetroitChimera.jpg"){
             let chimeraArtwork = SDLArtwork(image: chimeraImage, persistent: false, as: .JPG)
             let chimeraSoftButtonState1 = SDLSoftButtonState(stateName: "Chimera Soft Button State 1", text: "Detroit Chimera", artwork: chimeraArtwork)
             let chimeraSoftButtonState2 = SDLSoftButtonState(stateName: "Chimera Soft Button State 2", text: "Go Back", artwork: chimeraArtwork)
             let chimeraSoftButtonObject = SDLSoftButtonObject(name: "Show Chimera", states: [chimeraSoftButtonState1, chimeraSoftButtonState2],
                                                        initialStateName: "Chimera Soft Button State 1") { (buttonPress, buttonEvent) in
                 guard buttonPress != nil else { return }
-                ProxyManager.sharedManager.updateScreen(image: chimeraImage, text1: "Detroit", text2: "Chimera",
-                                                        template: .largeGraphicOnly)
+                ProxyManager.sharedManager.updateScreen(image: chimeraImage, text1: "Detroit", text2: "Chimera", template: .largeGraphicOnly)
+                sleep(5)
+                ProxyManager.sharedManager.redirectHome()
             }
             self.sdlManager.screenManager.softButtonObjects.append(chimeraSoftButtonObject)
         }
@@ -83,14 +76,22 @@ class ProxyManager: NSObject {
         // Start watching for a connection with a SDL Core
         sdlManager.start { (success, error) in
             if success {
+                self.uploadImage(path: "Assets/FordLarge.png")
+                self.uploadImage(path: "Assets/DetroitChimera.jpg")
+                self.uploadImage(path: "Assets/JoeLouis.jpg")
                 // Your app has successfully connected with the SDL Core
+//                SDLTTSChunk.init(text: "hello world!", type: .text)
                 self.initialize_buttons()
-                if let appImage = UIImage(named: "JoeLouis.jpg") {
-                    let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
-                    retrievedSoftButtonObject?.transitionToNextState()
-                    self.updateScreen(image: appImage, text1: "Joe", text2: "Louis", template: .graphicWithTextAndSoftButtons)
-                }
+                self.redirectHome()
             }
+        }
+    }
+
+    func redirectHome() {
+        if let appImage = UIImage(named: "Assets/FordLarge.png") {
+            let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
+            retrievedSoftButtonObject?.transitionToNextState()
+            self.updateScreen(image: appImage, text1: "Ford", text2: "Mobility", template: .graphicWithTextAndSoftButtons)
         }
     }
 
@@ -98,12 +99,8 @@ class ProxyManager: NSObject {
         sdlManager.screenManager.beginUpdates()
 
         let artwork = SDLArtwork(image: image, persistent: false, as: .JPG)
-        
-        self.sdlManager.fileManager.upload(artwork: artwork) {
-            (success, artworkName, bytesAvailable, error) in
-            guard error == nil else { return }
-            self.sdlManager.screenManager.primaryGraphic = artwork
-        }
+
+        self.sdlManager.screenManager.primaryGraphic = artwork
 
         sdlManager.screenManager.textField1 = text1
         sdlManager.screenManager.textField2 = text2
@@ -117,6 +114,16 @@ class ProxyManager: NSObject {
         self.sdlManager.send(request: display) { (request, response, error) in
             if response?.resultCode == .success {
                 // The template has been set successfully
+            }
+        }
+    }
+    
+    func uploadImage(path: String) {
+        if let image = UIImage(named: path) {
+            let artwork = SDLArtwork(image: image, persistent: false, as: .PNG)
+            self.sdlManager.fileManager.upload(artwork: artwork) {
+                (success, artworkName, bytesAvailable, error) in
+                guard error == nil else { return }
             }
         }
     }
