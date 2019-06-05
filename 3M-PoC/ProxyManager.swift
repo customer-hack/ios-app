@@ -40,8 +40,11 @@ class ProxyManager: NSObject {
 
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
 
+//        sdlManager.audioStreamingState = SDLAudioStreamingState._ObjectiveCType("test")
+        
     }
 
+    
     func initialize_buttons() {
         self.sdlManager.screenManager.softButtonObjects = []
         if let joeLouisImage = UIImage(named: "Assets/JoeLouis.jpg"){
@@ -76,14 +79,13 @@ class ProxyManager: NSObject {
         // Start watching for a connection with a SDL Core
         sdlManager.start { (success, error) in
             if success {
+                // Your app has successfully connected with the SDL Core
                 self.uploadImage(path: "Assets/FordLarge.png")
                 self.uploadImage(path: "Assets/DetroitChimera.jpg")
                 self.uploadImage(path: "Assets/JoeLouis.jpg")
-                // Your app has successfully connected with the SDL Core
-//                SDLTTSChunk.init(text: "hello world!", type: .text)
                 self.initialize_buttons()
                 self.redirectHome()
-            }
+          }
         }
     }
 
@@ -100,11 +102,15 @@ class ProxyManager: NSObject {
 
         let artwork = SDLArtwork(image: image, persistent: false, as: .JPG)
 
-        self.sdlManager.screenManager.primaryGraphic = artwork
 
+        sdlManager.screenManager.primaryGraphic = artwork
         sdlManager.screenManager.textField1 = text1
         sdlManager.screenManager.textField2 = text2
 
+
+        let sdlChunk = [SDLTTSChunk(text: "i bleed oval blue!", type: .text)]
+        let sdlSpeak = SDLSpeak.init(ttsChunks: sdlChunk)
+        sdlManager.send(sdlSpeak)
         sdlManager.screenManager.endUpdates { (error) in
             if error != nil {
                 print("Error in sdlManager.screenManager.endUpdates")
