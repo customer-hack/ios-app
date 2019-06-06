@@ -41,10 +41,10 @@ class ProxyManager: NSObject {
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
 
 //        sdlManager.audioStreamingState = SDLAudioStreamingState._ObjectiveCType("test")
-        
+
     }
 
-    
+
     func initialize_buttons() {
         self.sdlManager.screenManager.softButtonObjects = []
         if let joeLouisImage = UIImage(named: "Assets/JoeLouis.jpg"){
@@ -123,7 +123,7 @@ class ProxyManager: NSObject {
             }
         }
     }
-    
+
     func uploadImage(path: String) {
         if let image = UIImage(named: path) {
             let artwork = SDLArtwork(image: image, persistent: false, as: .PNG)
