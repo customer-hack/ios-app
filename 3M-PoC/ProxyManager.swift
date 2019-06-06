@@ -31,7 +31,7 @@ class ProxyManager: NSObject {
 
         let lifecycleConfiguration = SDLLifecycleConfiguration(appName: appName, fullAppId: fullAppId)
 
-        if let appImage = UIImage(named: "iconLogo") {
+        if let appImage = UIImage(named: "Assets/fordicon.jpg") {
             let appIcon = SDLArtwork(image: appImage, name: "fordicon.jpg", persistent: true, as: .JPG)
             lifecycleConfiguration.appIcon = appIcon
         }

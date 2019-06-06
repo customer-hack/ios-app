@@ -609,7 +609,7 @@
 		A30B46B72AE0D416789FE3B62D5272EB /* SDLSeatMemoryAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AE79C9600EA70EF5881BF5BC21D1DA0 /* SDLSeatMemoryAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A32DA2FB94D16F9690FA211B7232CA0E /* SDLCompassDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B01095011EA4A8FC3346F41785E74FE9 /* SDLCompassDirection.m */; };
 		A35D26D2F4235541946DABEB457962DB /* SDLChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E98731DBA2320DBCD69C365F8C1FEA /* SDLChoiceCell.m */; };
-		A37C214BDF86D99CB81BDE72197FCDBC /* SmartDeviceLink.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B22F2DCAFE99445A1803E78EC7B25740 /* SmartDeviceLink.bundle */; };
+		A37C214BDF86D99CB81BDE72197FCDBC /* SmartDeviceLink.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C197364227C0998A9025317EAD699894 /* SmartDeviceLink.bundle */; };
 		A3E21B69A7F69B848C2D6758AD21AA82 /* SDLLogManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A0B6D8EEC8D7757110944293B7EA5918 /* SDLLogManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A419AB4BDAA61FD5D5EF1BCF7C56365B /* SDLSetAppIconResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E61E5CCAAA1BD2E46F07A46ABA0B9143 /* SDLSetAppIconResponse.m */; };
 		A46D3195BF881B83073FF4D623072737 /* SDLRPCParameterNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 7782DC4E30CFEC404C6E9580B45E2565 /* SDLRPCParameterNames.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -1079,6 +1079,7 @@
 
 /* Begin PBXFileReference section */
 		0113AE5B04C2F14C51DD32EEBCD0E188 /* SDLArtwork.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLArtwork.m; path = SmartDeviceLink/SDLArtwork.m; sourceTree = "<group>"; };
+		012CE07CE00E36054DA038C75909F04A /* SmartDeviceLink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmartDeviceLink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		013A4D70B6BFA1204DFC89872CF25639 /* SmartDeviceLink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SmartDeviceLink.h; path = SmartDeviceLink/SmartDeviceLink.h; sourceTree = "<group>"; };
 		01886A4FB10C8783A42AC7A951CB1FC8 /* SDLLogTargetOSLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLLogTargetOSLog.h; path = SmartDeviceLink/SDLLogTargetOSLog.h; sourceTree = "<group>"; };
 		019AE8BEE595CBA7FB32F7973551E7AC /* SDLLockScreenViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLLockScreenViewController.m; path = SmartDeviceLink/SDLLockScreenViewController.m; sourceTree = "<group>"; };
@@ -1116,6 +1117,7 @@
 		08EAC381E17B837139ADC8692B78845A /* SDLFileWrapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLFileWrapper.h; path = SmartDeviceLink/SDLFileWrapper.h; sourceTree = "<group>"; };
 		0901BDE71B1903A6ADA0B59140C7D391 /* Pods-3M-PoC-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-3M-PoC-umbrella.h"; sourceTree = "<group>"; };
 		0946CF569A417F7D570175ADC8DAD023 /* SDLVehicleDataStatus.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLVehicleDataStatus.m; path = SmartDeviceLink/SDLVehicleDataStatus.m; sourceTree = "<group>"; };
+		09ADD7BC098538447E2420E619A16D3B /* Pods_3M_PoC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3M_PoC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		09B3FFB5F29806A7DF8CE338F073D3D4 /* SDLRDSData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLRDSData.m; path = SmartDeviceLink/SDLRDSData.m; sourceTree = "<group>"; };
 		09B8BAA1D0305454663FA4C1CAADE50B /* SDLDisplayType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLDisplayType.h; path = SmartDeviceLink/SDLDisplayType.h; sourceTree = "<group>"; };
 		09D7710BCF4AD87715E09C92FEAE6386 /* SDLImageFieldName.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLImageFieldName.h; path = SmartDeviceLink/SDLImageFieldName.h; sourceTree = "<group>"; };
@@ -1184,7 +1186,6 @@
 		19DC571961D3BD4DB3871196EFC2E570 /* SDLGetWayPoints.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLGetWayPoints.h; path = SmartDeviceLink/SDLGetWayPoints.h; sourceTree = "<group>"; };
 		19EAB94C5F4CD0AC23102E129DD9E691 /* SDLSyncMsgVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLSyncMsgVersion.h; path = SmartDeviceLink/SDLSyncMsgVersion.h; sourceTree = "<group>"; };
 		19F25AF7AB68699BC569DE617E4063F6 /* SDLVentilationMode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLVentilationMode.h; path = SmartDeviceLink/SDLVentilationMode.h; sourceTree = "<group>"; };
-		1A0D58127E2A14C7BDE2788F10669304 /* BiSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BiSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A195B74B2F9046FE3D497B8B94BC84A /* SDLFuelType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLFuelType.h; path = SmartDeviceLink/SDLFuelType.h; sourceTree = "<group>"; };
 		1A4169E2C6F4DC0549CCC6B65D2064B2 /* SDLProtocolMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLProtocolMessage.m; path = SmartDeviceLink/SDLProtocolMessage.m; sourceTree = "<group>"; };
 		1A862548A813D0F1B67FA9D14C6A8723 /* SDLPerformAudioPassThru.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLPerformAudioPassThru.m; path = SmartDeviceLink/SDLPerformAudioPassThru.m; sourceTree = "<group>"; };
@@ -1273,7 +1274,6 @@
 		2F820420BD8DF621DEB73AABA58D3C70 /* SDLSyncPDataResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLSyncPDataResponse.h; path = SmartDeviceLink/SDLSyncPDataResponse.h; sourceTree = "<group>"; };
 		2F9080A4EB1DDC57439872DE385D161D /* SDLLockScreenStatus.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLLockScreenStatus.h; path = SmartDeviceLink/SDLLockScreenStatus.h; sourceTree = "<group>"; };
 		2FA530EF7976AEDE7AE56CB84FA14AA7 /* SDLPreloadChoicesOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLPreloadChoicesOperation.m; path = SmartDeviceLink/SDLPreloadChoicesOperation.m; sourceTree = "<group>"; };
-		2FD281146C7CCF504E437AE2A734F871 /* SmartDeviceLink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SmartDeviceLink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FFD5676433BAD97907139AADA07A988 /* SDLVrCapabilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLVrCapabilities.h; path = SmartDeviceLink/SDLVrCapabilities.h; sourceTree = "<group>"; };
 		306576E8398EFB1CCE1846D43E732DC3 /* SDLWeatherAlert.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLWeatherAlert.h; path = SmartDeviceLink/SDLWeatherAlert.h; sourceTree = "<group>"; };
 		31080D977C578C2BF809327253584C2E /* SDLDisplayMode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLDisplayMode.m; path = SmartDeviceLink/SDLDisplayMode.m; sourceTree = "<group>"; };
@@ -1515,6 +1515,7 @@
 		69E4F17BAB9BB59D6B151EC1F5B991B3 /* SDLPRNDL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLPRNDL.h; path = SmartDeviceLink/SDLPRNDL.h; sourceTree = "<group>"; };
 		69F8642B1174B7AF20AA3FEF436A4B2E /* SDLImageResolution.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLImageResolution.m; path = SmartDeviceLink/SDLImageResolution.m; sourceTree = "<group>"; };
 		6A64C57B1C5E13120F8653450012B252 /* SDLGenericResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLGenericResponse.h; path = SmartDeviceLink/SDLGenericResponse.h; sourceTree = "<group>"; };
+		6A8BC5C78C7E73AA411B07180D034013 /* Pods_3M_PoCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3M_PoCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AFE9C4B378C6D685C8F87048294F2CD /* SDLEncodedSyncPDataResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLEncodedSyncPDataResponse.h; path = SmartDeviceLink/SDLEncodedSyncPDataResponse.h; sourceTree = "<group>"; };
 		6B37C3A192C661B980E9A78118B8832D /* SDLVehicleDataActiveStatus.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLVehicleDataActiveStatus.m; path = SmartDeviceLink/SDLVehicleDataActiveStatus.m; sourceTree = "<group>"; };
 		6B6CFAF1275C9DFD35CFCE8C3EA5E52A /* SDLSequentialRPCRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLSequentialRPCRequestOperation.h; path = SmartDeviceLink/SDLSequentialRPCRequestOperation.h; sourceTree = "<group>"; };
@@ -1574,6 +1575,7 @@
 		7AD272932F4D16DFA550527826C96ADF /* SDLSliderResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLSliderResponse.h; path = SmartDeviceLink/SDLSliderResponse.h; sourceTree = "<group>"; };
 		7AF379246DA998A802455ED0A522495E /* Pods-3M-PoC-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-3M-PoC-dummy.m"; sourceTree = "<group>"; };
 		7B09EA7B9A51753B3EA75883D5520CFE /* SDLProtocolReceivedMessageRouter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLProtocolReceivedMessageRouter.h; path = SmartDeviceLink/SDLProtocolReceivedMessageRouter.h; sourceTree = "<group>"; };
+		7B1F6B431A4C7D300274DCDBE2BC7043 /* BiSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BiSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B3815F140417C84308EDA659FF1780B /* SDLVoiceCommand.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLVoiceCommand.m; path = SmartDeviceLink/SDLVoiceCommand.m; sourceTree = "<group>"; };
 		7B8096170CD786E9919D4F35C9B05604 /* SDLSubscribeButtonResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLSubscribeButtonResponse.m; path = SmartDeviceLink/SDLSubscribeButtonResponse.m; sourceTree = "<group>"; };
 		7BC599784D5893AE06E5DE47C1334193 /* SDLRegisterAppInterface.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLRegisterAppInterface.m; path = SmartDeviceLink/SDLRegisterAppInterface.m; sourceTree = "<group>"; };
@@ -1599,7 +1601,6 @@
 		8344BF02EDE365379154972FE2B8AD70 /* SDLEnum.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLEnum.h; path = SmartDeviceLink/SDLEnum.h; sourceTree = "<group>"; };
 		834CF9C71EFAB4FABD5E6E139EB5EE6D /* SDLDisplayType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLDisplayType.m; path = SmartDeviceLink/SDLDisplayType.m; sourceTree = "<group>"; };
 		838AC74FE51065DE28F57CB1C93B30E1 /* SDLGetCloudAppPropertiesResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLGetCloudAppPropertiesResponse.m; path = SmartDeviceLink/SDLGetCloudAppPropertiesResponse.m; sourceTree = "<group>"; };
-		83DD24D7C7DDDFF953F7F07F19A8F33A /* Pods_3M_PoCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3M_PoCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8417732C81320F0F4E0A397EFB8668D0 /* SDLDeleteInteractionChoiceSetResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLDeleteInteractionChoiceSetResponse.m; path = SmartDeviceLink/SDLDeleteInteractionChoiceSetResponse.m; sourceTree = "<group>"; };
 		8447990FF52B6385A8AAB22DB2BECB54 /* SDLMetadataTags.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLMetadataTags.m; path = SmartDeviceLink/SDLMetadataTags.m; sourceTree = "<group>"; };
 		846393BA68237DF9FEF6AA673C67375A /* SDLFuelType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLFuelType.m; path = SmartDeviceLink/SDLFuelType.m; sourceTree = "<group>"; };
@@ -1669,7 +1670,6 @@
 		948663B9698A8DD24E0EC0BA2CBAD3FC /* SDLProtocolListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLProtocolListener.h; path = SmartDeviceLink/SDLProtocolListener.h; sourceTree = "<group>"; };
 		949A5948A196719D1A9B87EB006F1778 /* SDLGetSystemCapability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLGetSystemCapability.h; path = SmartDeviceLink/SDLGetSystemCapability.h; sourceTree = "<group>"; };
 		94AD8E12267E98F45446352DAD6CC24D /* SDLLogFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLLogFilter.m; path = SmartDeviceLink/SDLLogFilter.m; sourceTree = "<group>"; };
-		94C1A60816EB1CF49DD83421FCABFF2E /* Pods_3M_PoCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3M_PoCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		951FD4A75A016586DA0D13766CCD9C88 /* SDLSoftButtonType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLSoftButtonType.h; path = SmartDeviceLink/SDLSoftButtonType.h; sourceTree = "<group>"; };
 		9596190B0E7DF945D05866C4A21990EF /* SDLUnsubscribeWayPoints.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLUnsubscribeWayPoints.h; path = SmartDeviceLink/SDLUnsubscribeWayPoints.h; sourceTree = "<group>"; };
 		95ADD6A503B7C50F6584126E09D4F6FE /* SDLGetDTCs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLGetDTCs.h; path = SmartDeviceLink/SDLGetDTCs.h; sourceTree = "<group>"; };
@@ -1799,7 +1799,6 @@
 		B1C68F1F6DC4760F0B294484E6BB1A67 /* SDLRPCNotification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLRPCNotification.h; path = SmartDeviceLink/SDLRPCNotification.h; sourceTree = "<group>"; };
 		B1E0CF42865D4A77F3B1880914FEB935 /* SDLTriggerSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLTriggerSource.h; path = SmartDeviceLink/SDLTriggerSource.h; sourceTree = "<group>"; };
 		B1F239D9D939952ADA59716AE42AA850 /* SDLButtonPressResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLButtonPressResponse.m; path = SmartDeviceLink/SDLButtonPressResponse.m; sourceTree = "<group>"; };
-		B22F2DCAFE99445A1803E78EC7B25740 /* SmartDeviceLink.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartDeviceLink.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B23A4477041C957D85583437CEC505DD /* SDLTransportDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLTransportDelegate.h; path = SmartDeviceLink/SDLTransportDelegate.h; sourceTree = "<group>"; };
 		B264F636694D0B504DB26B1DE66F2BFD /* SDLSubscribeVehicleDataResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLSubscribeVehicleDataResponse.h; path = SmartDeviceLink/SDLSubscribeVehicleDataResponse.h; sourceTree = "<group>"; };
 		B2770AA429CC68954104FB27126290D9 /* SDLNotificationConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLNotificationConstants.m; path = SmartDeviceLink/SDLNotificationConstants.m; sourceTree = "<group>"; };
@@ -1858,6 +1857,7 @@
 		BE5FF02FBC0634DD59EF926328E7B938 /* SDLClimateControlCapabilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLClimateControlCapabilities.h; path = SmartDeviceLink/SDLClimateControlCapabilities.h; sourceTree = "<group>"; };
 		BE71E7F314D50D243834E379492B77E8 /* SDLDeleteInteractionChoiceSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLDeleteInteractionChoiceSet.m; path = SmartDeviceLink/SDLDeleteInteractionChoiceSet.m; sourceTree = "<group>"; };
 		BEA69A311C9C0C0844B20BAE8E77CC0A /* SDLLightState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLLightState.h; path = SmartDeviceLink/SDLLightState.h; sourceTree = "<group>"; };
+		BEF731A7FB3352E1B62FD91D94F773C0 /* Pods_3M_PoCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3M_PoCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6EBAD5DC0C82EA745C736E2FF98799 /* SDLChoiceSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLChoiceSet.h; path = SmartDeviceLink/SDLChoiceSet.h; sourceTree = "<group>"; };
 		BF76A8BFB2E9967A60905ED60A7AE278 /* SDLEncodedSyncPData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLEncodedSyncPData.m; path = SmartDeviceLink/SDLEncodedSyncPData.m; sourceTree = "<group>"; };
 		BFF8E0BD65174E75AB911A40EFEF3FB8 /* SDLDeliveryMode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLDeliveryMode.h; path = SmartDeviceLink/SDLDeliveryMode.h; sourceTree = "<group>"; };
@@ -1865,6 +1865,7 @@
 		C0FFC05E7B3A3E6C28D3F1D3271008AF /* SDLLockScreen.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = SDLLockScreen.strings; path = fr.lproj/SDLLockScreen.strings; sourceTree = "<group>"; };
 		C15337078F51B2A6FD1F525F48548DAC /* SDLPermissionFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLPermissionFilter.m; path = SmartDeviceLink/SDLPermissionFilter.m; sourceTree = "<group>"; };
 		C17F587566A2EAC6602B6C7B4301DF5F /* SDLHeadLampStatus.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLHeadLampStatus.m; path = SmartDeviceLink/SDLHeadLampStatus.m; sourceTree = "<group>"; };
+		C197364227C0998A9025317EAD699894 /* SmartDeviceLink.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartDeviceLink.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A0E48FE37F1113EFFE0CFE394E5100 /* SDLFileManagerConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLFileManagerConfiguration.h; path = SmartDeviceLink/SDLFileManagerConfiguration.h; sourceTree = "<group>"; };
 		C1C2A29D5A1559D10AF83544830316A4 /* SDLNotificationConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLNotificationConstants.h; path = SmartDeviceLink/SDLNotificationConstants.h; sourceTree = "<group>"; };
 		C1C483154312E7B4C521748A63CB016B /* SDLDeleteFileResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLDeleteFileResponse.m; path = SmartDeviceLink/SDLDeleteFileResponse.m; sourceTree = "<group>"; };
@@ -2082,7 +2083,6 @@
 		F6CA6D1AC15876E1D031B164A5963FED /* SDLSendLocationResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLSendLocationResponse.m; path = SmartDeviceLink/SDLSendLocationResponse.m; sourceTree = "<group>"; };
 		F72E8AD3B21D39656FAFCE48619760F0 /* SDLWeatherServiceData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDLWeatherServiceData.m; path = SmartDeviceLink/SDLWeatherServiceData.m; sourceTree = "<group>"; };
 		F74E043C484185CC4CFCCA3249B0C064 /* SDLLockScreen.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = SDLLockScreen.strings; path = "zh-Hans.lproj/SDLLockScreen.strings"; sourceTree = "<group>"; };
-		F7583AABE8C4D713BF75E5BB561052ED /* Pods_3M_PoC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3M_PoC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F768482A42F0C7E4B6DF31A266DF3327 /* SDLOnAudioPassThru.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLOnAudioPassThru.h; path = SmartDeviceLink/SDLOnAudioPassThru.h; sourceTree = "<group>"; };
 		F832C34A19220732E10CB2DFD48EC46F /* SDLStreamingAudioLifecycleManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLStreamingAudioLifecycleManager.h; path = SmartDeviceLink/SDLStreamingAudioLifecycleManager.h; sourceTree = "<group>"; };
 		F87A188C4758374D6AA82ABAC35E0675 /* SDLAppServiceManifest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDLAppServiceManifest.h; path = SmartDeviceLink/SDLAppServiceManifest.h; sourceTree = "<group>"; };
@@ -2245,12 +2245,12 @@
 		81A3A7BDE18D4C535B8EF25CB8E61D10 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A0D58127E2A14C7BDE2788F10669304 /* BiSON.framework */,
-				F7583AABE8C4D713BF75E5BB561052ED /* Pods_3M_PoC.framework */,
-				83DD24D7C7DDDFF953F7F07F19A8F33A /* Pods_3M_PoCTests.framework */,
-				94C1A60816EB1CF49DD83421FCABFF2E /* Pods_3M_PoCUITests.framework */,
-				B22F2DCAFE99445A1803E78EC7B25740 /* SmartDeviceLink.bundle */,
-				2FD281146C7CCF504E437AE2A734F871 /* SmartDeviceLink.framework */,
+				7B1F6B431A4C7D300274DCDBE2BC7043 /* BiSON.framework */,
+				09ADD7BC098538447E2420E619A16D3B /* Pods_3M_PoC.framework */,
+				BEF731A7FB3352E1B62FD91D94F773C0 /* Pods_3M_PoCTests.framework */,
+				6A8BC5C78C7E73AA411B07180D034013 /* Pods_3M_PoCUITests.framework */,
+				C197364227C0998A9025317EAD699894 /* SmartDeviceLink.bundle */,
+				012CE07CE00E36054DA038C75909F04A /* SmartDeviceLink.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3870,7 +3870,7 @@
 			);
 			name = BiSON;
 			productName = BiSON;
-			productReference = 1A0D58127E2A14C7BDE2788F10669304 /* BiSON.framework */;
+			productReference = 7B1F6B431A4C7D300274DCDBE2BC7043 /* BiSON.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		3D5C8508F5D7F6E6DD86E88C9CF9F8F4 /* SmartDeviceLink-SmartDeviceLink */ = {
@@ -3887,7 +3887,7 @@
 			);
 			name = "SmartDeviceLink-SmartDeviceLink";
 			productName = "SmartDeviceLink-SmartDeviceLink";
-			productReference = B22F2DCAFE99445A1803E78EC7B25740 /* SmartDeviceLink.bundle */;
+			productReference = C197364227C0998A9025317EAD699894 /* SmartDeviceLink.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		6B78913E89FEE652C8C0DD7E84EFDB55 /* Pods-3M-PoCTests */ = {
@@ -3906,7 +3906,7 @@
 			);
 			name = "Pods-3M-PoCTests";
 			productName = "Pods-3M-PoCTests";
-			productReference = 83DD24D7C7DDDFF953F7F07F19A8F33A /* Pods_3M_PoCTests.framework */;
+			productReference = BEF731A7FB3352E1B62FD91D94F773C0 /* Pods_3M_PoCTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D80456DDA93CD634453A682E14808519 /* SmartDeviceLink */ = {
@@ -3926,7 +3926,7 @@
 			);
 			name = SmartDeviceLink;
 			productName = SmartDeviceLink;
-			productReference = 2FD281146C7CCF504E437AE2A734F871 /* SmartDeviceLink.framework */;
+			productReference = 012CE07CE00E36054DA038C75909F04A /* SmartDeviceLink.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D8ECB2AD5B4338AA0F0EEA47CE5DF9C6 /* Pods-3M-PoCUITests */ = {
@@ -3945,7 +3945,7 @@
 			);
 			name = "Pods-3M-PoCUITests";
 			productName = "Pods-3M-PoCUITests";
-			productReference = 94C1A60816EB1CF49DD83421FCABFF2E /* Pods_3M_PoCUITests.framework */;
+			productReference = 6A8BC5C78C7E73AA411B07180D034013 /* Pods_3M_PoCUITests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		F94BEEB970D23C1DA6F1D435FD4FE879 /* Pods-3M-PoC */ = {
@@ -3965,7 +3965,7 @@
 			);
 			name = "Pods-3M-PoC";
 			productName = "Pods-3M-PoC";
-			productReference = F7583AABE8C4D713BF75E5BB561052ED /* Pods_3M_PoC.framework */;
+			productReference = 09ADD7BC098538447E2420E619A16D3B /* Pods_3M_PoC.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
