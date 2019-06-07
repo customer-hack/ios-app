@@ -30,6 +30,8 @@
 
 .idea/
 Pods/
+!openxc-ios-library/Example/Pods/
+.session.vim
 
 #####
 # OS X temporary files that should never be committed
