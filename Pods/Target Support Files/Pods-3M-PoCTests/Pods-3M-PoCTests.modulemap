@@ -1,6 +1,0 @@
-framework module Pods_3M_PoCTests {
-  umbrella header "Pods-3M-PoCTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
