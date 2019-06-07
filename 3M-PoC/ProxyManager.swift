@@ -47,8 +47,8 @@ class ProxyManager: NSObject {
 
     func initialize_buttons() {
         self.sdlManager.screenManager.softButtonObjects = []
-        if let joeLouisImage = UIImage(named: "Assets/JoeLouis.jpg"){
-            let joeLouisArtwork = SDLArtwork(image: joeLouisImage, persistent: false, as: .JPG)
+        if let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png"){
+            let joeLouisArtwork = SDLArtwork(image: joeLouisImage, persistent: false, as: .PNG)
             let joeLouisSoftButtonState1 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 1", text: "Joe Louis", artwork: joeLouisArtwork)
             let joeLouisSoftButtonState2 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 2", text: "Go Back", artwork: joeLouisArtwork)
             let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2], initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
@@ -60,8 +60,8 @@ class ProxyManager: NSObject {
             self.sdlManager.screenManager.softButtonObjects.append(joeLouisSoftButtonObject)
         }
 
-        if let chimeraImage = UIImage(named: "Assets/DetroitChimera.jpg"){
-            let chimeraArtwork = SDLArtwork(image: chimeraImage, persistent: false, as: .JPG)
+        if let chimeraImage = UIImage(named: "Assets/ChimeraWide.png"){
+            let chimeraArtwork = SDLArtwork(image: chimeraImage, persistent: false, as: .PNG)
             let chimeraSoftButtonState1 = SDLSoftButtonState(stateName: "Chimera Soft Button State 1", text: "Detroit Chimera", artwork: chimeraArtwork)
             let chimeraSoftButtonState2 = SDLSoftButtonState(stateName: "Chimera Soft Button State 2", text: "Go Back", artwork: chimeraArtwork)
             let chimeraSoftButtonObject = SDLSoftButtonObject(name: "Show Chimera", states: [chimeraSoftButtonState1, chimeraSoftButtonState2],
@@ -80,9 +80,13 @@ class ProxyManager: NSObject {
         sdlManager.start { (success, error) in
             if success {
                 // Your app has successfully connected with the SDL Core
-                self.uploadImage(path: "Assets/FordLarge.png")
-                self.uploadImage(path: "Assets/DetroitChimera.jpg")
-                self.uploadImage(path: "Assets/JoeLouis.jpg")
+                self.uploadImage(path: "Assets/FordLarge.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/DetroitChimera.jpg", imageType: .JPG)
+                self.uploadImage(path: "Assets/JoeLouis.jpg", imageType: .JPG)
+                self.uploadImage(path: "Assets/JoeLouisWide.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/JoeLouisMap240.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/ChimeraMap240.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/ChimeraWide.png", imageType: .PNG)
                 self.initialize_buttons()
                 self.redirectHome()
           }
@@ -124,9 +128,9 @@ class ProxyManager: NSObject {
         }
     }
 
-    func uploadImage(path: String) {
+    func uploadImage(path: String, imageType: SDLArtworkImageFormat) {
         if let image = UIImage(named: path) {
-            let artwork = SDLArtwork(image: image, persistent: false, as: .PNG)
+            let artwork = SDLArtwork(image: image, persistent: false, as: imageType)
             self.sdlManager.fileManager.upload(artwork: artwork) {
                 (success, artworkName, bytesAvailable, error) in
                 guard error == nil else { return }
