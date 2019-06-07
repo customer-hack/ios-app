@@ -7,7 +7,7 @@ target '3M-PoC' do
 
   # Pods for 3M-PoC
   pod 'SmartDeviceLink'
-
+  pod 'openxcframework', path: './openxc-ios-library/openxcframework.podspec'
 
   target '3M-PoCTests' do
     inherit! :search_paths
