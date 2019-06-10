@@ -1,0 +1,14 @@
+{
+    "poc": {
+        "awscloudformation": {
+            "AuthRoleName": "a3m-poc-poc-20190610155910-authRole",
+            "UnauthRoleArn": "arn:aws:iam::371900921998:role/a3m-poc-poc-20190610155910-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::371900921998:role/a3m-poc-poc-20190610155910-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "a3m-poc-poc-20190610155910-deployment",
+            "UnauthRoleName": "a3m-poc-poc-20190610155910-unauthRole",
+            "StackName": "a3m-poc-poc-20190610155910",
+            "StackId": "arn:aws:cloudformation:us-east-2:371900921998:stack/a3m-poc-poc-20190610155910/9a7647f0-8bc2-11e9-989e-06faad620df0"
+        }
+    }
+}

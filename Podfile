@@ -7,7 +7,9 @@ target '3M-PoC' do
 
   # Pods for 3M-PoC
   pod 'SmartDeviceLink'
-  pod 'openxcframework', path: './openxc-ios-library/openxcframework.podspec'
+  # pod 'openxcframework', path: './openxc-ios-library/openxcframework.podspec'
+  pod 'AWSCore', '~> 2.9.6'
+  pod 'AWSAppSync', '~> 2.12.0'
 
   target '3M-PoCTests' do
     inherit! :search_paths
