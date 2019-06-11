@@ -4,6 +4,8 @@ PODS:
     - ReachabilitySwift (= 4.3.0)
     - SQLite.swift (= 0.11.6)
   - AWSCore (2.9.8)
+  - AWSSQS (2.9.8):
+    - AWSCore (= 2.9.8)
   - BiSON (1.1.1)
   - ReachabilitySwift (4.3.0)
   - SmartDeviceLink (6.2.2):
@@ -18,12 +20,14 @@ PODS:
 DEPENDENCIES:
   - AWSAppSync (~> 2.12.0)
   - AWSCore (~> 2.9.6)
+  - AWSSQS
   - SmartDeviceLink
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AWSAppSync
     - AWSCore
+    - AWSSQS
     - BiSON
     - ReachabilitySwift
     - SmartDeviceLink
@@ -32,11 +36,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AWSAppSync: 0b5c81db1138faa85de8737a5bcdf77fa9add620
   AWSCore: 5da86c5afde44a87b06a2df50601bca81a8cee13
+  AWSSQS: 84012627f8d65866a352a2118c64c562d1c8cee4
   BiSON: 2663348e6c64bfbf9cc82e4b0b3f7eed2cb3eb6b
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SmartDeviceLink: 5e30162699a6d5c2cd411029c69de62f3e1bf32e
   SQLite.swift: 46d890be8601964454bd3392527f863d1b802d45
 
-PODFILE CHECKSUM: 3cd3b51b78f5283a2e2d78f012687177e52e98ee
+PODFILE CHECKSUM: af1ab94f823b0ce47cd972a1c51893d528b31dc4
 
 COCOAPODS: 1.7.0

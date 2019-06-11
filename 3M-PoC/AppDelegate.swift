@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSAppSync
+import AWSSQS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Error initializing appsync client. \(error)")
         }
         // other methods
+        initAWSServiceManager()
         ProxyManager.sharedManager.connect()
         return true
     }
@@ -56,6 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func initAWSServiceManager() {
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,identityPoolId:"us-east-2:29f84db8-25ab-408e-888a-0bfc165d57c1")
+        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
 
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+    }
 }
 

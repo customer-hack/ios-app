@@ -8,8 +8,9 @@
 
 import Foundation
 import SmartDeviceLink
+import AWSSQS
 
-class ProxyManager: NSObject {
+class ProxyManager: NSObject, XMLParserDelegate {
 //    let appName = "DOOM"
 //    let fullAppId = "666"
 
@@ -21,6 +22,7 @@ class ProxyManager: NSObject {
 
     // Singleton
     static let sharedManager = ProxyManager()
+    static let sqs = AWSSQS.default()
 
 //    for mac emulator
 //    let lifecycleConfiguration = SDLLifecycleConfiguration(appName: "App Name", fullAppId: "App Id", ipAddress: "IP Address", port: Port))
@@ -40,39 +42,52 @@ class ProxyManager: NSObject {
 
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
 
-//        sdlManager.audioStreamingState = SDLAudioStreamingState._ObjectiveCType("test")
+        let reqReceive = AWSSQSReceiveMessageRequest()
+        reqReceive?.queueUrl = "https://sqs.us-east-2.amazonaws.com/371900921998/camera_queue.fifo"
+        reqReceive?.waitTimeSeconds = 5
+        reqReceive?.maxNumberOfMessages = 5
+        
+        ProxyManager.sqs.receiveMessage(reqReceive!){ (result, err) in
+            if let result = result {
+                print("SQS result: \(result)")
 
+//                let parser = XMLParser(data: result!)
+//                parser.delegate = self
+//                parser.parse()
+            }
+            if let err = err {
+                print("SQS error: \(err)")
+            }
+        }
     }
 
 
     func initialize_buttons() {
         self.sdlManager.screenManager.softButtonObjects = []
-        if let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png"){
-            let joeLouisArtwork = SDLArtwork(image: joeLouisImage, persistent: false, as: .PNG)
-            let joeLouisSoftButtonState1 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 1", text: "Joe Louis", artwork: joeLouisArtwork)
-            let joeLouisSoftButtonState2 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 2", text: "Go Back", artwork: joeLouisArtwork)
-            let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2], initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
-                guard buttonPress != nil else { return }
-                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
-                sleep(5)
-                ProxyManager.sharedManager.redirectHome()
-            }
-            self.sdlManager.screenManager.softButtonObjects.append(joeLouisSoftButtonObject)
+        let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
+        let joeLouisArtwork = SDLArtwork(image: joeLouisImage, persistent: false, as: .PNG)
+        let joeLouisSoftButtonState1 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 1", text: "Joe Louis", artwork: joeLouisArtwork)
+        let joeLouisSoftButtonState2 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 2", text: "Go Back", artwork: joeLouisArtwork)
+        let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2], initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
+            guard buttonPress != nil else { return }
+            ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
+            sleep(5)
+            ProxyManager.sharedManager.redirectHome()
         }
+        self.sdlManager.screenManager.softButtonObjects.append(joeLouisSoftButtonObject)
 
-        if let chimeraImage = UIImage(named: "Assets/ChimeraWide.png"){
-            let chimeraArtwork = SDLArtwork(image: chimeraImage, persistent: false, as: .PNG)
-            let chimeraSoftButtonState1 = SDLSoftButtonState(stateName: "Chimera Soft Button State 1", text: "Detroit Chimera", artwork: chimeraArtwork)
-            let chimeraSoftButtonState2 = SDLSoftButtonState(stateName: "Chimera Soft Button State 2", text: "Go Back", artwork: chimeraArtwork)
-            let chimeraSoftButtonObject = SDLSoftButtonObject(name: "Show Chimera", states: [chimeraSoftButtonState1, chimeraSoftButtonState2],
-                                                       initialStateName: "Chimera Soft Button State 1") { (buttonPress, buttonEvent) in
-                guard buttonPress != nil else { return }
-                ProxyManager.sharedManager.updateScreen(image: chimeraImage, text1: "Detroit", text2: "Chimera", template: .largeGraphicOnly)
-                sleep(5)
-                ProxyManager.sharedManager.redirectHome()
-            }
-            self.sdlManager.screenManager.softButtonObjects.append(chimeraSoftButtonObject)
+        let chimeraImage = UIImage(named: "Assets/ChimeraWide.png")!
+        let chimeraArtwork = SDLArtwork(image: chimeraImage, persistent: false, as: .PNG)
+        let chimeraSoftButtonState1 = SDLSoftButtonState(stateName: "Chimera Soft Button State 1", text: "Detroit Chimera", artwork: chimeraArtwork)
+        let chimeraSoftButtonState2 = SDLSoftButtonState(stateName: "Chimera Soft Button State 2", text: "Go Back", artwork: chimeraArtwork)
+        let chimeraSoftButtonObject = SDLSoftButtonObject(name: "Show Chimera", states: [chimeraSoftButtonState1, chimeraSoftButtonState2],
+                                                   initialStateName: "Chimera Soft Button State 1") { (buttonPress, buttonEvent) in
+            guard buttonPress != nil else { return }
+            ProxyManager.sharedManager.updateScreen(image: chimeraImage, text1: "Detroit", text2: "Chimera", template: .largeGraphicOnly)
+            sleep(5)
+            ProxyManager.sharedManager.redirectHome()
         }
+        self.sdlManager.screenManager.softButtonObjects.append(chimeraSoftButtonObject)
     }
 
     func connect() {
