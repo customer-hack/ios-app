@@ -9,6 +9,7 @@
 import Foundation
 import SmartDeviceLink
 import AWSSQS
+import AWSCore
 
 class ProxyManager: NSObject, XMLParserDelegate {
 //    let appName = "DOOM"
@@ -45,15 +46,15 @@ class ProxyManager: NSObject, XMLParserDelegate {
         let reqReceive = AWSSQSReceiveMessageRequest()
         reqReceive?.queueUrl = "https://sqs.us-east-2.amazonaws.com/371900921998/camera_queue.fifo"
         reqReceive?.waitTimeSeconds = 5
-        reqReceive?.maxNumberOfMessages = 5
+        reqReceive?.maxNumberOfMessages = 1
+        reqReceive?.messageAttributeNames = ["All"]
         
         ProxyManager.sqs.receiveMessage(reqReceive!){ (result, err) in
+            print("TYPE: \(type(of: result))")
+
             if let result = result {
                 print("SQS result: \(result)")
-
-//                let parser = XMLParser(data: result!)
-//                parser.delegate = self
-//                parser.parse()
+                print(self.get(attribute: "lat", from: result))
             }
             if let err = err {
                 print("SQS error: \(err)")
@@ -61,6 +62,9 @@ class ProxyManager: NSObject, XMLParserDelegate {
         }
     }
 
+    func get(attribute: String, from result: AWSSQSReceiveMessageResult) -> String {
+        return result.messages![0].messageAttributes![attribute]!.stringValue!
+    }
 
     func initialize_buttons() {
         self.sdlManager.screenManager.softButtonObjects = []
