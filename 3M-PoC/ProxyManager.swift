@@ -24,8 +24,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
     // Singleton
     static let sharedManager = ProxyManager()
     static let sqs = AWSSQS.default()
-    // don't look at this
-    static var result: AWSSQSReceiveMessageResult?
+    static var latestSQSMessage: AWSSQSMessage?
 
 //    for mac emulator
 //    let lifecycleConfiguration = SDLLifecycleConfiguration(appName: "App Name", fullAppId: "App Id", ipAddress: "IP Address", port: Port))
@@ -45,48 +44,63 @@ class ProxyManager: NSObject, XMLParserDelegate {
 
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
 
-        print(self.pop())
+        while(true) {
+            if let message = self.popMessageQueue() {
+                print("Item in the queue: \(message)")
+                print(message.messageAttributes!["uuid"]!.stringValue!)
+                if message.messageAttributes!["uuid"]!.stringValue! == "830C2041195F" {
+                    print("----- Found 830C2041195F -----")
+                    showJoeLouisScreen()
+                }
+            } else {
+                print("Nothing in the queue!")
+            }
+        }
     }
     
-    func pop() -> AWSSQSReceiveMessageResult {
+    func popMessageQueue() -> AWSSQSMessage? {
         let semaphore = DispatchSemaphore(value: 0)
 
         let reqReceive = AWSSQSReceiveMessageRequest()
         reqReceive?.queueUrl = "https://sqs.us-east-2.amazonaws.com/371900921998/camera_queue.fifo"
-        reqReceive?.waitTimeSeconds = 5
+        reqReceive?.waitTimeSeconds = 20
         reqReceive?.maxNumberOfMessages = 1
         reqReceive?.messageAttributeNames = ["All"]
 
         ProxyManager.sqs.receiveMessage(reqReceive!){ (result, err) in
-            print("TYPE: \(type(of: result))")
-            
+
             if let result = result {
-                print("SQS result: \(result)")
-                print(self.get(attribute: "lat", from: result))
-                
-                let reqDelete = AWSSQSDeleteMessageRequest()
-                reqDelete?.queueUrl = "https://sqs.us-east-2.amazonaws.com/371900921998/camera_queue.fifo"
-                reqDelete?.receiptHandle = result.messages![0].receiptHandle
-                
-                print("deleting item at: \(result.messages![0].body!))")
-                ProxyManager.sqs.deleteMessage(reqDelete!) { (err) in
-                    if let err = err {
-                        print("SQS Delete Error: \(err)")
-                    } else {
-                        print("deleted item at: \(result.messages![0].body!))")
+                if let message = result.messages?[0] {
+//                    print("TYPE: \(type(of: result.messages![0]))")
+//                    print("SQS result: \(result)")
+//                    print(self.get(attribute: "lat", from: result))
+                    
+                    let reqDelete = AWSSQSDeleteMessageRequest()
+                    reqDelete?.queueUrl = "https://sqs.us-east-2.amazonaws.com/371900921998/camera_queue.fifo"
+                    reqDelete?.receiptHandle = result.messages![0].receiptHandle
+                    
+//                    print("deleting item at: \(result.messages![0].body!))")
+                    ProxyManager.sqs.deleteMessage(reqDelete!) { (err) in
+                        if let err = err {
+                            print("SQS Delete Error: \(err)")
+                        } else {
+//                            print("deleted item at: \(result.messages![0].body!))")
+                        }
                     }
+                    ProxyManager.latestSQSMessage = message
+                } else {
+                    ProxyManager.latestSQSMessage = nil
                 }
             }
             if let err = err {
                 print("SQS error: \(err)")
             }
-            ProxyManager.result = result!
             semaphore.signal()
         }
 
         semaphore.wait()
         
-        return ProxyManager.result!
+        return ProxyManager.latestSQSMessage
     }
 
     func get(attribute: String, from result: AWSSQSReceiveMessageResult) -> String {
@@ -101,9 +115,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
         let joeLouisSoftButtonState2 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 2", text: "Go Back", artwork: joeLouisArtwork)
         let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2], initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
             guard buttonPress != nil else { return }
-            ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
-            sleep(5)
-            ProxyManager.sharedManager.redirectHome()
+            self.showJoeLouisScreen()
         }
         self.sdlManager.screenManager.softButtonObjects.append(joeLouisSoftButtonObject)
 
@@ -182,5 +194,11 @@ class ProxyManager: NSObject, XMLParserDelegate {
                 guard error == nil else { return }
             }
         }
+    }
+    
+    func showJoeLouisScreen() {
+        ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
+        sleep(5)
+        ProxyManager.sharedManager.redirectHome()
     }
 }
