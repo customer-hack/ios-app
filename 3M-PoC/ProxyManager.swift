@@ -44,8 +44,8 @@ class ProxyManager: NSObject, XMLParserDelegate {
         let configuration = SDLConfiguration(lifecycle: lifecycleConfiguration, lockScreen: .disabled(), logging: .default(), fileManager: .default())
 
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
-
     }
+
 
     func connect() {
         // Start watching for a connection with a SDL Core
@@ -95,11 +95,11 @@ class ProxyManager: NSObject, XMLParserDelegate {
 //                    print("TYPE: \(type(of: result.messages![0]))")
 //                    print("SQS result: \(result)")
 //                    print(self.get(attribute: "lat", from: result))
-                    
+
                     let reqDelete = AWSSQSDeleteMessageRequest()
                     reqDelete?.queueUrl = "https://sqs.us-east-2.amazonaws.com/371900921998/camera_queue.fifo"
                     reqDelete?.receiptHandle = result.messages![0].receiptHandle
-                    
+
 //                    print("deleting item at: \(result.messages![0].body!))")
                     ProxyManager.sqs.deleteMessage(reqDelete!) { (err) in
                         if let err = err {
@@ -120,7 +120,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
         }
 
         semaphore.wait()
-        
+
         return ProxyManager.latestSQSMessage
     }
 
@@ -158,7 +158,9 @@ class ProxyManager: NSObject, XMLParserDelegate {
         if let appImage = UIImage(named: "Assets/FordLarge.png") {
             let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
             retrievedSoftButtonObject?.transitionToNextState()
-            self.updateScreen(image: appImage, text1: "Ford", text2: "Mobility", template: .graphicWithTextAndSoftButtons)
+//            let text1 = ("my speed is \(String(describing: getSpeed()))")
+            let text1 = "Ford"
+            self.updateScreen(image: appImage, text1: text1, text2: "Mobility", template: .graphicWithTextAndSoftButtons)
         }
     }
 
@@ -167,11 +169,9 @@ class ProxyManager: NSObject, XMLParserDelegate {
 
         let artwork = SDLArtwork(image: image, persistent: false, as: .JPG)
 
-
         sdlManager.screenManager.primaryGraphic = artwork
         sdlManager.screenManager.textField1 = text1
         sdlManager.screenManager.textField2 = text2
-
 
         let sdlChunk = [SDLTTSChunk(text: "i bleed oval blue!", type: .text)]
         let sdlSpeak = SDLSpeak.init(ttsChunks: sdlChunk)
@@ -198,11 +198,36 @@ class ProxyManager: NSObject, XMLParserDelegate {
             }
         }
     }
-    
+
     func showJoeLouisScreen() {
         let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
         ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
         sleep(5)
         ProxyManager.sharedManager.redirectHome()
+    }
+
+    func getSpeed() -> (NSNumber & SDLFloat)? {
+        var speed: (NSNumber & SDLFloat)?
+        let semaphore = DispatchSemaphore(value: 0)
+        let getVehicleData = SDLGetVehicleData(accelerationPedalPosition: true, airbagStatus: true, beltStatus: true, bodyInformation: true, clusterModeStatus: true, deviceStatus: true, driverBraking: true, eCallInfo: true, emergencyEvent: true, engineTorque: true, externalTemperature: true, fuelLevel: true, fuelLevelState: true, gps: true, headLampStatus: true, instantFuelConsumption: true, myKey: true, odometer: true, prndl: true, rpm: true, speed: true, steeringWheelAngle: true, tirePressure: true, vin: true, wiperStatus: true)
+
+        self.sdlManager.send(request:getVehicleData) { (request, response, error) in
+            guard let response = response as? SDLGetVehicleDataResponse else { return }
+
+            if let error = error {
+                print("Encountered Error sending GetVehicleData: \(error)")
+                return
+            }
+
+            speed = response.speed
+            if speed != nil {
+                print(speed as Any)
+            } else {
+                print("Speed not found!")
+            }
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return speed
     }
 }
