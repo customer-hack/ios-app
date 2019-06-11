@@ -11,6 +11,7 @@ target '3M-PoC' do
   pod 'AWSCore', '~> 2.9.6'
   pod 'AWSAppSync', '~> 2.12.0'
   pod 'AWSSQS'
+  pod "AsyncSwift"
 
   target '3M-PoCTests' do
     inherit! :search_paths
