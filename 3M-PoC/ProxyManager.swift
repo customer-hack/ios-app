@@ -60,7 +60,8 @@ class ProxyManager: NSObject, XMLParserDelegate {
                 self.uploadImage(path: "Assets/ChimeraMap240.png", imageType: .PNG)
                 self.uploadImage(path: "Assets/ChimeraWide.png", imageType: .PNG)
                 self.initialize_buttons()
-                self.redirectHome()
+                self.getSpeed()
+//                self.redirectHome()
 //                self.startBackgroundQueueListener()
             }
         }
@@ -145,8 +146,8 @@ class ProxyManager: NSObject, XMLParserDelegate {
         if let appImage = UIImage(named: "Assets/FordLarge.png") {
             let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
             retrievedSoftButtonObject?.transitionToNextState()
-            let text1 = ("my speed is \(String(describing: getSpeed()))")
-//            let text1 = "Ford"
+//            let text1 = ("my speed is \(String(describing: getSpeed()))")
+            let text1 = "Ford"
             self.updateScreen(image: appImage, text1: text1, text2: "Mobility", template: .graphicWithTextAndSoftButtons)
         }
     }
@@ -193,33 +194,38 @@ class ProxyManager: NSObject, XMLParserDelegate {
         ProxyManager.sharedManager.redirectHome()
     }
 
-    func getSpeed() -> (NSNumber & SDLFloat)? {
-        var speed: (NSNumber & SDLFloat)?
-        let semaphore = DispatchSemaphore(value: 0)
-        let getVehicleData = SDLGetVehicleData(accelerationPedalPosition: false, airbagStatus: false, beltStatus: false, bodyInformation: false, clusterModeStatus: false, deviceStatus: false, driverBraking: false, eCallInfo: false, emergencyEvent: false, engineTorque: false, externalTemperature: false, fuelLevel: false, fuelLevelState: false, gps: false, headLampStatus: false, instantFuelConsumption: false, myKey: false, odometer: false, prndl: false, rpm: false, speed: true, steeringWheelAngle: false, tirePressure: false, vin: false, wiperStatus: false)
+    func getSpeed() {
+
+        let getVehicleData = SDLGetVehicleData()
+        getVehicleData.speed = true as NSNumber & SDLBool
 
         self.sdlManager.send(request:getVehicleData) { (request, response, error) in
             guard let response = response as? SDLGetVehicleDataResponse else { return }
+            let isAllowed = self.sdlManager.permissionManager.isRPCAllowed("SDLGetVehicleData")
+            let text2 = isAllowed.description
 
             if let error = error {
                 print("Encountered Error sending GetVehicleData: \(error)")
                 let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
                 let text1 = "Error: \(error)"
-                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: text1, text2: "Louis", template: .largeGraphicOnly)
-                semaphore.signal()
+                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: text1, text2: text2, template: .graphicWithText)
                 return
             }
 
-            speed = response.speed
+            let speed = response.speed
             if speed != nil {
                 print(speed as Any)
+                let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
+                let text1 = "The speed is \(String(describing: speed))"
+                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: text1, text2: text2, template: .graphicWithText)
+                
             } else {
                 print("Speed not found!")
+                let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
+                let text1 = "Error: The speed is nil"
+                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: text1, text2: text2, template: .graphicWithText)
             }
-            semaphore.signal()
         }
-        semaphore.wait()
-        return speed
     }
 
     func startBackgroundQueueListener() {
