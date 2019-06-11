@@ -10,6 +10,7 @@ import Foundation
 import SmartDeviceLink
 import AWSSQS
 import AWSCore
+import Async
 
 class ProxyManager: NSObject, XMLParserDelegate {
 //    let appName = "DOOM"
@@ -44,26 +45,46 @@ class ProxyManager: NSObject, XMLParserDelegate {
 
         sdlManager = SDLManager(configuration: configuration, delegate: self as? SDLManagerDelegate)
 
-        while(true) {
-            if let message = self.popMessageQueue() {
-                print("Item in the queue: \(message)")
-                print(message.messageAttributes!["uuid"]!.stringValue!)
-                if message.messageAttributes!["uuid"]!.stringValue! == "830C2041195F" {
-                    print("----- Found 830C2041195F -----")
-                    showJoeLouisScreen()
+    }
+
+    func connect() {
+        // Start watching for a connection with a SDL Core
+        sdlManager.start { (success, error) in
+            if success {
+                // Your app has successfully connected with the SDL Core
+                self.uploadImage(path: "Assets/FordLarge.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/DetroitChimera.jpg", imageType: .JPG)
+                self.uploadImage(path: "Assets/JoeLouis.jpg", imageType: .JPG)
+                self.uploadImage(path: "Assets/JoeLouisWide.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/JoeLouisMap240.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/ChimeraMap240.png", imageType: .PNG)
+                self.uploadImage(path: "Assets/ChimeraWide.png", imageType: .PNG)
+                self.initialize_buttons()
+                self.redirectHome()
+                Async.background {
+                    while(true) {
+                        if let message = self.popMessageQueue() {
+                            print("Item in the queue: \(message)")
+                            print(message.messageAttributes!["uuid"]!.stringValue!)
+                            if message.messageAttributes!["uuid"]!.stringValue! == "830C2041195F" {
+                                print("----- Found 830C2041195F -----")
+                                self.showJoeLouisScreen()
+                            }
+                        } else {
+                            print("Nothing in the queue!")
+                        }
+                    }
                 }
-            } else {
-                print("Nothing in the queue!")
             }
         }
     }
-    
+
     func popMessageQueue() -> AWSSQSMessage? {
         let semaphore = DispatchSemaphore(value: 0)
 
         let reqReceive = AWSSQSReceiveMessageRequest()
         reqReceive?.queueUrl = "https://sqs.us-east-2.amazonaws.com/371900921998/camera_queue.fifo"
-        reqReceive?.waitTimeSeconds = 20
+//        reqReceive?.waitTimeSeconds = 20
         reqReceive?.maxNumberOfMessages = 1
         reqReceive?.messageAttributeNames = ["All"]
 
@@ -133,24 +154,6 @@ class ProxyManager: NSObject, XMLParserDelegate {
         self.sdlManager.screenManager.softButtonObjects.append(chimeraSoftButtonObject)
     }
 
-    func connect() {
-        // Start watching for a connection with a SDL Core
-        sdlManager.start { (success, error) in
-            if success {
-                // Your app has successfully connected with the SDL Core
-                self.uploadImage(path: "Assets/FordLarge.png", imageType: .PNG)
-                self.uploadImage(path: "Assets/DetroitChimera.jpg", imageType: .JPG)
-                self.uploadImage(path: "Assets/JoeLouis.jpg", imageType: .JPG)
-                self.uploadImage(path: "Assets/JoeLouisWide.png", imageType: .PNG)
-                self.uploadImage(path: "Assets/JoeLouisMap240.png", imageType: .PNG)
-                self.uploadImage(path: "Assets/ChimeraMap240.png", imageType: .PNG)
-                self.uploadImage(path: "Assets/ChimeraWide.png", imageType: .PNG)
-                self.initialize_buttons()
-                self.redirectHome()
-          }
-        }
-    }
-
     func redirectHome() {
         if let appImage = UIImage(named: "Assets/FordLarge.png") {
             let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
@@ -197,6 +200,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
     }
     
     func showJoeLouisScreen() {
+        let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
         ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
         sleep(5)
         ProxyManager.sharedManager.redirectHome()
