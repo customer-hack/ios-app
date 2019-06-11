@@ -13,11 +13,11 @@ import AWSCore
 import Async
 
 class ProxyManager: NSObject, XMLParserDelegate {
-//    let appName = "DOOM"
-//    let fullAppId = "666"
+    let appName = "DOOM"
+    let fullAppId = "666"
 
-    let appName = "3M"
-    let fullAppId = "1446742213"
+//    let appName = "3M"
+//    let fullAppId = "1446742213"
 
     // Manager
     fileprivate var sdlManager: SDLManager!
@@ -61,20 +61,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
                 self.uploadImage(path: "Assets/ChimeraWide.png", imageType: .PNG)
                 self.initialize_buttons()
                 self.redirectHome()
-                Async.background {
-                    while(true) {
-                        if let message = self.popMessageQueue() {
-                            print("Item in the queue: \(message)")
-                            print(message.messageAttributes!["uuid"]!.stringValue!)
-                            if message.messageAttributes!["uuid"]!.stringValue! == "830C2041195F" {
-                                print("----- Found 830C2041195F -----")
-                                self.showJoeLouisScreen()
-                            }
-                        } else {
-                            print("Nothing in the queue!")
-                        }
-                    }
-                }
+//                self.startBackgroundQueueListener()
             }
         }
     }
@@ -158,8 +145,8 @@ class ProxyManager: NSObject, XMLParserDelegate {
         if let appImage = UIImage(named: "Assets/FordLarge.png") {
             let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
             retrievedSoftButtonObject?.transitionToNextState()
-//            let text1 = ("my speed is \(String(describing: getSpeed()))")
-            let text1 = "Ford"
+            let text1 = ("my speed is \(String(describing: getSpeed()))")
+//            let text1 = "Ford"
             self.updateScreen(image: appImage, text1: text1, text2: "Mobility", template: .graphicWithTextAndSoftButtons)
         }
     }
@@ -209,13 +196,17 @@ class ProxyManager: NSObject, XMLParserDelegate {
     func getSpeed() -> (NSNumber & SDLFloat)? {
         var speed: (NSNumber & SDLFloat)?
         let semaphore = DispatchSemaphore(value: 0)
-        let getVehicleData = SDLGetVehicleData(accelerationPedalPosition: true, airbagStatus: true, beltStatus: true, bodyInformation: true, clusterModeStatus: true, deviceStatus: true, driverBraking: true, eCallInfo: true, emergencyEvent: true, engineTorque: true, externalTemperature: true, fuelLevel: true, fuelLevelState: true, gps: true, headLampStatus: true, instantFuelConsumption: true, myKey: true, odometer: true, prndl: true, rpm: true, speed: true, steeringWheelAngle: true, tirePressure: true, vin: true, wiperStatus: true)
+        let getVehicleData = SDLGetVehicleData(accelerationPedalPosition: false, airbagStatus: false, beltStatus: false, bodyInformation: false, clusterModeStatus: false, deviceStatus: false, driverBraking: false, eCallInfo: false, emergencyEvent: false, engineTorque: false, externalTemperature: false, fuelLevel: false, fuelLevelState: false, gps: false, headLampStatus: false, instantFuelConsumption: false, myKey: false, odometer: false, prndl: false, rpm: false, speed: true, steeringWheelAngle: false, tirePressure: false, vin: false, wiperStatus: false)
 
         self.sdlManager.send(request:getVehicleData) { (request, response, error) in
             guard let response = response as? SDLGetVehicleDataResponse else { return }
 
             if let error = error {
                 print("Encountered Error sending GetVehicleData: \(error)")
+                let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
+                let text1 = "Error: \(error)"
+                ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: text1, text2: "Louis", template: .largeGraphicOnly)
+                semaphore.signal()
                 return
             }
 
@@ -229,5 +220,22 @@ class ProxyManager: NSObject, XMLParserDelegate {
         }
         semaphore.wait()
         return speed
+    }
+
+    func startBackgroundQueueListener() {
+        Async.background {
+            while(true) {
+                if let message = self.popMessageQueue() {
+                    print("Item in the queue: \(message)")
+                    print(message.messageAttributes!["uuid"]!.stringValue!)
+                    if message.messageAttributes!["uuid"]!.stringValue! == "830C2041195F" {
+                        print("----- Found 830C2041195F -----")
+                        self.showJoeLouisScreen()
+                    }
+                } else {
+                    print("Nothing in the queue!")
+                }
+            }
+        }
     }
 }
