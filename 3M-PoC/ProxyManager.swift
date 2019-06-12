@@ -244,7 +244,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
                         let longText = message.messageAttributes!["text_to_speech"]!.stringValue!
                         self.showCameraEvent(image: navImage, template: .largeGraphicOnly, speechMessage: longText, delay:10)
                         let image = UIImage(named: "Assets/JoeLouisWide.png")!
-                        self.showCameraEvent(image: image, template: .largeGraphicOnly, delay:33)
+                        self.showCameraEvent(image: image, template: .largeGraphicOnly, delay:23)
                         
                     } else if message.messageAttributes!["uuid"]!.stringValue! == "0A8E4C5B4892"  || message.messageAttributes!["uuid"]!.stringValue! == "749324AD9639" {
                         print("----- Found Detroit Chimera -----")
@@ -254,7 +254,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
                         let navImage = UIImage(named: "Assets/ChimeraMap240.png")!
                         self.showCameraEvent(image: navImage, template: .largeGraphicOnly, speechMessage: longText, delay:10)
                         let image = UIImage(named: "Assets/ChimeraWide.png")!
-                        self.showCameraEvent(image: image, template: .largeGraphicOnly, delay:25)
+                        self.showCameraEvent(image: image, template: .largeGraphicOnly, delay:16)
                     } else if message.messageAttributes!["uuid"]!.stringValue! == "B9378CE25608" {
                         print("----- Found Work Zone Ahead -----")
                         let image = UIImage(named: "Assets/sync_road_work.png")!
