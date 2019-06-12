@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         
         SetWorkersPresentButton.titleEdgeInsets = UIEdgeInsets(top: 10, left: 150, bottom: 10, right: 10)
         SetWorkersPresentButton.setTitleColor(UIColor.black, for: .normal)
-        SetWorkersPresentButton.setBackgroundImage(UIImage(named: "Assets/ipad_button_historical.png"), for: .normal)
+        SetWorkersPresentButton.setBackgroundImage(UIImage(named: "Assets/ipad_button_workers_present.png"), for: .normal)
         
         //Set No Workers Present in 3M Database Button Styling
         SetNoWorkersPresentButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         
         SetNoWorkersPresentButton.titleEdgeInsets = UIEdgeInsets(top: 10, left: 150, bottom: 10, right: 10)
         SetNoWorkersPresentButton.setTitleColor(UIColor.black, for: .normal)
-        SetNoWorkersPresentButton.setBackgroundImage(UIImage(named: "Assets/ipad_button_historical.png"), for: .normal)
+        SetNoWorkersPresentButton.setBackgroundImage(UIImage(named: "Assets/ipad_button_workers_not_present.png"), for: .normal)
         
     }
 
