@@ -13,11 +13,11 @@ import AWSCore
 import Async
 
 class ProxyManager: NSObject, XMLParserDelegate {
-    let appName = "DOOM"
-    let fullAppId = "666"
+//    let appName = "DOOM"
+//    let fullAppId = "666"
 
-//    let appName = "3M"
-//    let fullAppId = "1446742213"
+    let appName = "3M"
+    let fullAppId = "1446742213"
 
     // Manager
     fileprivate var sdlManager: SDLManager!
@@ -59,10 +59,10 @@ class ProxyManager: NSObject, XMLParserDelegate {
                 self.uploadImage(path: "Assets/JoeLouisMap240.png", imageType: .PNG)
                 self.uploadImage(path: "Assets/ChimeraMap240.png", imageType: .PNG)
                 self.uploadImage(path: "Assets/ChimeraWide.png", imageType: .PNG)
-                self.initialize_buttons()
-                self.getSpeed()
-//                self.redirectHome()
-//                self.startBackgroundQueueListener()
+                //self.initialize_buttons()
+                //self.getSpeed()
+                self.redirectHome()
+                self.startBackgroundQueueListener()
             }
         }
     }
@@ -115,7 +115,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
     func get(attribute: String, from result: AWSSQSReceiveMessageResult) -> String {
         return result.messages![0].messageAttributes![attribute]!.stringValue!
     }
-
+    
     func initialize_buttons() {
         self.sdlManager.screenManager.softButtonObjects = []
         let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
@@ -124,7 +124,7 @@ class ProxyManager: NSObject, XMLParserDelegate {
         let joeLouisSoftButtonState2 = SDLSoftButtonState(stateName: "Joe Louis Soft Button State 2", text: "Go Back", artwork: joeLouisArtwork)
         let joeLouisSoftButtonObject = SDLSoftButtonObject(name: "Show Joe Louis", states: [joeLouisSoftButtonState1, joeLouisSoftButtonState2], initialStateName: "Joe Louis Soft Button State 1") { (buttonPress, buttonEvent) in
             guard buttonPress != nil else { return }
-            self.showJoeLouisScreen()
+            self.redirectHome()
         }
         self.sdlManager.screenManager.softButtonObjects.append(joeLouisSoftButtonObject)
 
@@ -143,27 +143,23 @@ class ProxyManager: NSObject, XMLParserDelegate {
     }
 
     func redirectHome() {
-        if let appImage = UIImage(named: "Assets/FordLarge.png") {
-            let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
-            retrievedSoftButtonObject?.transitionToNextState()
-//            let text1 = ("my speed is \(String(describing: getSpeed()))")
-            let text1 = "Ford"
-            self.updateScreen(image: appImage, text1: text1, text2: "Mobility", template: .graphicWithTextAndSoftButtons)
+        if let appImage = UIImage(named: "Assets/3m_ford_banner.png") {
+            //let retrievedSoftButtonObject = self.sdlManager.screenManager.softButtonObjectNamed("Soft Button Object Name")
+            //retrievedSoftButtonObject?.transitionToNextState()
+            
+            self.updateScreen(image: appImage, template: .largeGraphicOnly)
         }
     }
 
-    func updateScreen(image: UIImage, text1: String, text2: String, template: SDLPredefinedLayout) {
+    func updateScreen(image: UIImage, text1: String = "", text2: String = "", template: SDLPredefinedLayout, imageFormat: SDLArtworkImageFormat = .JPG ) {
         sdlManager.screenManager.beginUpdates()
 
-        let artwork = SDLArtwork(image: image, persistent: false, as: .JPG)
+        let artwork = SDLArtwork(image: image, persistent: false, as: imageFormat)
 
         sdlManager.screenManager.primaryGraphic = artwork
         sdlManager.screenManager.textField1 = text1
         sdlManager.screenManager.textField2 = text2
 
-        let sdlChunk = [SDLTTSChunk(text: "i bleed oval blue!", type: .text)]
-        let sdlSpeak = SDLSpeak.init(ttsChunks: sdlChunk)
-        sdlManager.send(sdlSpeak)
         sdlManager.screenManager.endUpdates { (error) in
             if error != nil {
                 print("Error in sdlManager.screenManager.endUpdates")
@@ -187,11 +183,18 @@ class ProxyManager: NSObject, XMLParserDelegate {
         }
     }
 
-    func showJoeLouisScreen() {
-        let joeLouisImage = UIImage(named: "Assets/JoeLouisWide.png")!
-        ProxyManager.sharedManager.updateScreen(image: joeLouisImage, text1: "Joe", text2: "Louis", template: .largeGraphicOnly)
-        sleep(5)
-        ProxyManager.sharedManager.redirectHome()
+    func showCameraEvent(image: UIImage, text1: String = "", text2: String = "", template: SDLPredefinedLayout, speechMessage: String = "", delay:UInt32 = 10) {
+        updateScreen(image: image, text1: text1, text2: text2, template: template)
+        if speechMessage != "" {
+            speak(speechMessage: speechMessage)
+        }
+        sleep(delay)
+    }
+    
+    func speak(speechMessage: String) {
+        let sdlChunk = [SDLTTSChunk(text: speechMessage, type: .text)]
+        let sdlSpeak = SDLSpeak.init(ttsChunks: sdlChunk)
+        sdlManager.send(sdlSpeak)
     }
 
     func getSpeed() {
@@ -234,26 +237,101 @@ class ProxyManager: NSObject, XMLParserDelegate {
                 if let message = self.popMessageQueue() {
                     print("Item in the queue: \(message)")
                     print(message.messageAttributes!["uuid"]!.stringValue!)
-                    if message.messageAttributes!["uuid"]!.stringValue! == "830C2041195F" {
-                        print("----- Found 830C2041195F -----")
-                        self.showJoeLouisScreen()
+                    if message.messageAttributes!["uuid"]!.stringValue! == "B0EA8B0B1223" {
+                        print("----- Found Joe Louis -----")
+                        let navImage = UIImage(named: "Assets/JoeLouisMap240.png")!
+                        //let longText = "Monument to Joe Louis. The 8000 pound, 24 foot long sculpture, honors boxer Joe Louis, who grew up in Black Bottom, a former African-American neighborhood on Detroit’s east side. Lewis was the heavyweight champion of the world from 1937 to 1950. He is largely regarded as the first African American to become a national hero, with his 1938 defeat of the German boxer Max Schmeling coming to symbolize both the breaking of racial barriers and the rise of American power leading up to World War 2"
+                        let longText = message.messageAttributes!["text_to_speech"]!.stringValue!
+                        self.showCameraEvent(image: navImage, template: .largeGraphicOnly, speechMessage: longText, delay:10)
+                        let image = UIImage(named: "Assets/JoeLouisWide.png")!
+                        self.showCameraEvent(image: image, template: .largeGraphicOnly, delay:33)
+                        
+                    } else if message.messageAttributes!["uuid"]!.stringValue! == "0A8E4C5B4892"  || message.messageAttributes!["uuid"]!.stringValue! == "749324AD9639" {
+                        print("----- Found Detroit Chimera -----")
+                        //let longText = "On a large wall of Russell Industrial Center is Michigan's largest graffiti mural. Measuring 8,750 square feet, the mural is the work of artist Kobie Solomon. The symbolism is a Chimera representing Detroit’s official teams: head — The Detroit Lions (football), stripe — The Detroit Tigers (baseball),  wings — The Detroit Redwings (hockey), and chest/joints — The Detroit Pistons (basketball)."
+                        let longText = message.messageAttributes!["text_to_speech"]!.stringValue!
+
+                        let navImage = UIImage(named: "Assets/ChimeraMap240.png")!
+                        self.showCameraEvent(image: navImage, template: .largeGraphicOnly, speechMessage: longText, delay:10)
+                        let image = UIImage(named: "Assets/ChimeraWide.png")!
+                        self.showCameraEvent(image: image, template: .largeGraphicOnly, delay:25)
+                    } else if message.messageAttributes!["uuid"]!.stringValue! == "B9378CE25608" {
+                        print("----- Found Work Zone Ahead -----")
+                        let image = UIImage(named: "Assets/sync_road_work.png")!
+                        //let longText = "Caution, there are workers present performing road work ahead.  Please reduce speed."
+                        let longText = message.messageAttributes!["text_to_speech"]!.stringValue!
+                        let text_field1 = message.messageAttributes!["text_field1"]!.stringValue!
+                        let text_field2 = message.messageAttributes!["text_field2"]!.stringValue!
+
+                        
+                        self.showCameraEvent(image: image, text1: text_field1, text2: text_field2 , template: .graphicWithText, speechMessage: longText)
+                        
+                        //Post back Speed and Location
+                        let randomSpeed = String(Int.random(in:30 ... 55))
+                        let randomLat = String(Float.random(in: 44.85 ... 44.9))
+                        let randomLong = String(Float.random(in: -93.5 ... -93))
+                        self.postSQSMessage(urlString: "https://k28dw5onac.execute-api.us-east-2.amazonaws.com/prod/vehicle-data", uuid: message.messageAttributes!["uuid"]!.stringValue!, speed: randomSpeed, lat:randomLat, long:randomLong)
+
                     }
                 } else {
                     print("Nothing in the queue!")
                 }
+                
+                
+                ProxyManager.sharedManager.redirectHome()
+
             }
         }
     }
     
-    func postSQSMessage(uuid:String){
+    func postSQSMessage(urlString:String, uuid: String, speed: String="0", lat: String="0", long: String="0", workers:String="0"){
         print("UUID: \(uuid)")
-        let url = URL(string: "https://k28dw5onac.execute-api.us-east-2.amazonaws.com/prod/uuid")!
+        print("Speed: \(speed)")
+        print("Lat: \(lat)")
+        print("Long: \(long)")
+        let url = URL(string: urlString)!
         var request = URLRequest(url: url)
+        var parameters : [String:Any]
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         request.httpMethod = "POST"
-        let parameters: [String: Any] = [
-            "uuid": uuid,
-        ]
+        
+        if lat != "0" && long != "0"{
+             parameters = [
+                "uuid": uuid,
+                "speed" : speed,
+                "latitude" : lat,
+                "longitude" : long
+            ]
+        } else if workers == "0" {
+            parameters = [
+                "uuid": uuid,
+                "contrast": 0.5
+            ]
+        } else {
+            request.addValue("Bearer FSmybd40tZMepnG0xBAelCavjruDqP", forHTTPHeaderField: "Authorization")
+            
+            if workers == "present"{
+                parameters = [
+                    "uuid": uuid,
+                    "dynamic_data": [
+                        "work_zone" : "true",
+                        "message": "message_text",
+                        "contact": "www.3m.com"
+                        ]
+                    ]
+       
+            }else{
+                parameters = [
+                    "uuid": uuid,
+                    "dynamic_data": [
+                        "message": "message_text",
+                        "contact": "www.3m.com"
+                    ]
+                ]
+            }
+        }
+        print(parameters)
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options:.prettyPrinted)
         } catch let error {
@@ -280,7 +358,12 @@ class ProxyManager: NSObject, XMLParserDelegate {
             print("responseString = \(responseString)")
         }
         
-        task.resume()    }
+        task.resume()
+        
+    }
+    
+    
+
 }
 
 extension Dictionary {
@@ -304,3 +387,6 @@ extension CharacterSet {
         return allowed
     }()
 }
+
+
+

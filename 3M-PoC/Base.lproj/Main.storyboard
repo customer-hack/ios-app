@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9" orientation="portrait">
+    <device id="ipad12_9" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,38 +15,46 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="_M_PoC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="uPL-dT-234">
-                                <rect key="frame" x="592" y="178" width="350" height="200"/>
+                                <rect key="frame" x="508" y="178" width="350" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
-                                <state key="normal" title="Add Chimera to AWS Queue">
+                                <state key="normal" backgroundImage="ipad_button_detroit_chimera.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="AddChimeratoAWSQueue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yAe-yQ-G0q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Ec9-t4-Ih0">
-                                <rect key="frame" x="592" y="498" width="350" height="200"/>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Ec9-t4-Ih0">
+                                <rect key="frame" x="286" y="524" width="350" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
-                                <state key="normal" title="Add Historical to AWS Queue">
+                                <state key="normal" backgroundImage="ipad_button_historical.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="AddHistoricaltoQueue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GMh-kV-sO1"/>
+                                    <action selector="SetWorkersPresent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SGR-Pz-ido"/>
+                                </connections>
+                            </button>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="9Eq-g3-dM0">
+                                <rect key="frame" x="730" y="524" width="350" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                <state key="normal" backgroundImage="ipad_button_historical.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="SetNoWorkersPresent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9cb-mu-xah"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="rZQ-Ux-g2B">
-                                <rect key="frame" x="112" y="178" width="350" height="200"/>
+                                <rect key="frame" x="79" y="178" width="350" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Add Joe Louis to AWS Queue">
+                                <state key="normal" backgroundImage="ipad_button_joe_louis.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -54,10 +62,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="wAe-72-ShG">
-                                <rect key="frame" x="112" y="498" width="350" height="200"/>
+                                <rect key="frame" x="950" y="178" width="350" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Add Construction to AWS Queue">
+                                <state key="normal" backgroundImage="ipad_button_road_work.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -65,7 +72,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCl-RQ-OIm">
-                                <rect key="frame" x="112" y="851" width="830" height="67"/>
+                                <rect key="frame" x="268" y="836" width="830" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
@@ -74,6 +81,7 @@
                                 </state>
                                 <connections>
                                     <action selector="AddConstructiontoQueue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ubJ-Bz-VX7"/>
+                                    <action selector="ResetUIButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M9m-Ad-8Zu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -82,9 +90,10 @@
                     </view>
                     <connections>
                         <outlet property="AddChimeraToQueue" destination="uPL-dT-234" id="tiH-ab-yOa"/>
-                        <outlet property="AddHistoricalToQueue" destination="Ec9-t4-Ih0" id="i95-Fo-UXT"/>
                         <outlet property="AddJoeLouisToQueue" destination="rZQ-Ux-g2B" id="OgK-9E-3HK"/>
                         <outlet property="ConstructionToQueueButton" destination="wAe-72-ShG" id="fDR-1x-Thz"/>
+                        <outlet property="SetNoWorkersPresentButton" destination="9Eq-g3-dM0" id="wwt-z1-LTn"/>
+                        <outlet property="SetWorkersPresentButton" destination="Ec9-t4-Ih0" id="bf6-Pn-mED"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -92,4 +101,10 @@
             <point key="canvasLocation" x="18.1640625" y="11.859443631039531"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ipad_button_detroit_chimera.png" width="700" height="400"/>
+        <image name="ipad_button_historical.png" width="700" height="400"/>
+        <image name="ipad_button_joe_louis.png" width="700" height="400"/>
+        <image name="ipad_button_road_work.png" width="700" height="400"/>
+    </resources>
 </document>
